@@ -29,7 +29,7 @@ It includes:
 
 ## 🧠 Technologies
 - **Languages:** Python (pandas, sqlalchemy, psycopg2), SQL  
-- **Databases:** PostgreSQL, SQLite  
+- **Databases:** MySQL, SQLite  
 - **Cloud & Tools:** AWS RDS, Docker, GitHub Actions, pgAdmin  
 - **Bioinformatics:** GEOparse, Biopython, pyBigWig, pysam  
 
@@ -40,4 +40,5 @@ It includes:
 python data_ingest/fetch_geo_data.py
 python database_pipeline/load_to_postgres.py
 docker-compose up -d
+
 

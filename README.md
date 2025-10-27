@@ -28,17 +28,23 @@ It includes:
 ---
 
 ## 🧠 Technologies
-- **Languages:** Python (pandas, sqlalchemy, psycopg2), SQL  
+- **Languages:** Python (pandas, SQLAlchemy, PyMySQL) 
 - **Databases:** MySQL, SQLite  
-- **Cloud & Tools:** AWS RDS, Docker, GitHub Actions, pgAdmin  
-- **Bioinformatics:** GEOparse, Biopython, pyBigWig, pysam  
+- **Cloud & Tools:** AWS RDS (MySQL), EC2  
+- **Bioinformatics:** GEOparse, Biopython, pysam
+- ### 💾 Database
+- **MySQL 8.0** for structured storage of genomic and clinical metadata
+- Managed via Docker for local development and AWS RDS for cloud hosting
+- Accessed through SQLAlchemy with the `pymysql` connector
+
 
 ---
 
 ## 📈 Example Pipeline (Simplified)
 ```bash
 python data_ingest/fetch_geo_data.py
-python database_pipeline/load_to_postgres.py
+python database_pipeline/load_to_mysql.py
 docker-compose up -d
+
 
 

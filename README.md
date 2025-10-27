@@ -11,7 +11,7 @@ It includes:
 - **Data ingestion** from public NGS datasets (GEO, TCGA, cBioPortal)
 - **Database design** for variant, transcriptomic, and metadata
 - **ETL pipeline** transforming raw FASTQ metadata into structured tables
-- **Cloud deployment** using Docker, PostgreSQL, and AWS RDS
+- **Cloud deployment** using Docker, MySQL, and AWS RDS
 - **Query optimization and dashboarding** using Python/SQL analytics
 
 ---
@@ -40,3 +40,4 @@ It includes:
 python data_ingest/fetch_geo_data.py
 python database_pipeline/load_to_postgres.py
 docker-compose up -d
+

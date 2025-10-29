@@ -6,7 +6,8 @@ from sqlalchemy import create_engine, text
 # --- Dynamically set paths ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # folder of this script
 DATA_INGEST_DIR = os.path.join(BASE_DIR, '..', 'data_ingest')  # ../data_ingest relative to script
-
+print(DATA_INGEST_DIR)
+"""
 DB_URI = 'mysql+pymysql://root:password@localhost:3306/bioinfo_db'
 engine = create_engine(DB_URI)
 
@@ -68,3 +69,4 @@ for file in os.listdir(DATA_INGEST_DIR):
     except Exception as e:
         print(f"[ERROR] Failed to process {file}: {e}")
 
+"""

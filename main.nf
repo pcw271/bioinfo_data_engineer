@@ -1,6 +1,6 @@
 nextflow.enable.dsl=2
 
-params.reads = "data_ingest/**/*rna_seq.augmented_star_gene_counts.tsv"
+params.reads = "data_ingest/TCGA/**/*rna_seq.augmented_star_gene_counts.tsv"
 params.outdir = "results"
 
 process PROCESS_COUNTS {

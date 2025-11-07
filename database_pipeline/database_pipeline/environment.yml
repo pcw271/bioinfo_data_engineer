@@ -1,0 +1,13 @@
+name: bioinfo_data
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pandas
+  - requests
+  - pip
+  - pip:
+      - sqlalchemy
+      - pymysql
+

@@ -1,0 +1,8 @@
+work/
+.nextflow*
+results/
+data_ingest/
+*.csv
+*.tsv
+*.parquet
+

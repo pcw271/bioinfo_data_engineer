@@ -1,50 +1,60 @@
-# 🧬 Bioinformatics Data Engineer Portfolio
+# TCGA-LUAD Tumor Microenvironment & Survival Analysis Pipeline
 
-### Developer: Pei-Chen Wu  
-**Goal:** Build a production-grade bioinformatics data platform integrating genomic data pipelines, databases, and cloud deployment.
+Workflow for processing TCGA Lung Adenocarcinoma (LUAD) bulk RNA-seq data, constructing gene expression matrices, extracting tumor microenvironment (TME) phenotypes, and evaluating clinical relevance via PCA clustering and survival modeling.
 
----
+This pipeline is:
+- **Reproducible** (Nextflow-based processing)
+- **Configurable** (conda environments & modular scripts)
+- **Clinically interpretable** (survival + Cox regression)
 
-## 🚀 Project Overview
-This portfolio demonstrates how bioinformatics and data engineering intersect to create scalable and queryable genomic data systems.  
-It includes:
-- **Data ingestion** from public NGS datasets (GEO, TCGA, cBioPortal)
-- **Database design** for variant, transcriptomic, and metadata
-- **ETL pipeline** transforming raw FASTQ metadata into structured tables
-- **Cloud deployment** using Docker, MySQL, and AWS RDS
-- **Query optimization and dashboarding** using Python/SQL analytics
+## 🔬 Biological Motivation
 
----
+Bulk RNA-seq reflects the **cellular ecosystem** of tumor tissue.
+From LUAD expression profiles, we infer **Tumor Microenvironment (TME)** phenotypes:
 
-## 🧩 Folder Structure
-| Folder | Description |
-|---------|-------------|
-| `data_ingest/` | Scripts to download and parse genomics datasets |
-| `database_pipeline/` | ETL scripts to load and transform data into databases |
-| `database_deploy/` | Docker, CI/CD, and cloud deployment setup |
-| `notebooks/` | Exploratory and QC analysis |
-| `docs/` | Database schema, diagrams, and metadata model |
+| TME State | Biology | Clinical Implication |
+|---|---|---|
+| **Immune_Hot** | High CD8 T-cell infiltration | Often **sensitive** to immune checkpoint inhibitors |
+| **Neutral** | No dominant program | Intermediate outcomes |
+| **Stromal_Cold** | High EMT, fibroblast, TGF-β; immune-excluded | Often **resistant** to immunotherapy and associated with worse prognosis |
 
----
+## 🧱 Pipeline Overview
 
-## 🧠 Technologies
-- **Languages:** Python (pandas, SQLAlchemy, PyMySQL) 
-- **Databases:** MySQL, SQLite  
-- **Cloud & Tools:** AWS RDS (MySQL), EC2  
-- **Bioinformatics:** GEOparse, Biopython, pysam
-- ### 💾 Database
-- **MySQL 8.0** for structured storage of genomic and clinical metadata
-- Managed via Docker for local development and AWS RDS for cloud hosting
-- Accessed through SQLAlchemy with the `pymysql` connector
+Raw TCGA → Nextflow → Clean Count Matrix → TPM → PCA → TME Assignment → KM/Cox Survival
 
+## 📁 Project Structure
 
----
+bioinfo_data_engineer/
+ ├─ main.nf
+ ├─ nextflow.config
+ ├─ scripts/
+ │   ├─ build_matrix.py
+ │   ├─ pca_qc.py
+ │   ├─ km_by_tme.py
+ │   ├─ km_cox_by_tme.py
+ ├─ results/        # ignored
+ ├─ data_ingest/    # ignored
+ └─ README.md
 
-## 📈 Example Pipeline (Simplified)
-```bash
-python data_ingest/fetch_geo_data.py
-python database_pipeline/load_to_mysql.py
-docker-compose up -d
+## ⚙️ Running
 
+conda activate bioinfo_data
+nextflow run main.nf
+python3 scripts/build_matrix.py
+python3 scripts/pca_qc.py
+python3 scripts/km_by_tme.py
+python3 scripts/km_cox_by_tme.py
 
+## 📊 Key Findings
 
+- PCA separates immune-infiltrated vs stromal-excluded tumors.
+- Kaplan–Meier: **Stromal_Cold** exhibits worse survival than **Immune_Hot**.
+- Cox model (adjusted for age) indicates ~60% higher mortality risk in Stromal_Cold.
+
+## 🔐 Data Policy
+
+Raw TCGA data is not included; must be downloaded from the GDC Data Portal.
+
+## 📣 Citation
+
+Thorsson et al., Cell 2018 — *The Immune Landscape of Cancer*.

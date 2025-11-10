@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 import pandas as pd
 from pathlib import Path
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--counts_dir", required=True, help="Directory containing *.clean.tsv files")
+parser.add_argument("--output_dir", default=".", help="Output directory")
+args = parser.parse_args()
 
 # Location of cleaned per-sample files
-COUNTS_DIR = Path("results/counts")
-
+COUNTS_DIR = Path(args.counts_dir)
 # Collect all .clean.tsv files
 files = sorted(COUNTS_DIR.glob("*.clean.tsv"))
 if not files:
@@ -31,10 +36,12 @@ count_matrix = pd.concat(count_tables, axis=1).fillna(0)
 tpm_matrix   = pd.concat(tpm_tables, axis=1).fillna(0)
 
 # Make output directories
-outdir = Path("results/matrix")
+#count_matrix.to_parquet("count_matrix.parquet")
+#tpm_matrix.to_parquet("tpm_matrix.parquet")
+
+outdir = Path(args.output_dir)
 outdir.mkdir(parents=True, exist_ok=True)
 
-# Save as parquet (efficient storage)
 count_matrix.to_parquet(outdir / "count_matrix.parquet")
 tpm_matrix.to_parquet(outdir / "tpm_matrix.parquet")
 

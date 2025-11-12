@@ -140,9 +140,7 @@ workflow clean_only {
 */
 /*
 workflow pca_only {
-    /*
-     * Load already built TPM matrix
-     */
+
     Channel
         .fromPath("${params.outdir}/matrix/tpm_matrix.parquet")
         .set { tpm_matrix_ch }

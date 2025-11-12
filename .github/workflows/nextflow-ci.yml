@@ -1,0 +1,51 @@
+name: Nextflow CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run-nextflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: bioinfo_data
+          environment-file: environment.yml
+          python-version: 3.10
+
+      - name: Cache Nextflow
+        uses: actions/cache@v4
+        with:
+          path: ~/.nextflow
+          key: nextflow-${{ runner.os }}-${{ hashFiles('**/main.nf') }}
+
+      - name: Install Nextflow
+        run: |
+          curl -s https://get.nextflow.io | bash
+          sudo mv nextflow /usr/local/bin/
+
+      - name: Run pipeline
+        run: |
+          nextflow run main.nf -with-report report.html -with-trace trace.txt
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-results
+          path: results/
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextflow-report
+          path: |
+            report.html
+            trace.txt

@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 from pathlib import Path
+import os
 
 tpm = pd.read_parquet("results/matrix/tpm_matrix.batch_resid.parquet")
 log = tpm  # already log2 scaled
@@ -26,6 +27,7 @@ for name, sig in signatures.items():
     scores[name] = log.loc[sig_genes].mean(axis=0)
 
 scores_df = pd.DataFrame(scores)
+Path("results/qc").mkdir(parents=True, exist_ok=True)
 scores_df.to_csv("results/qc/signature_scores.tsv", sep="\t")
 
 print("✅ Signature scores saved → results/qc/signature_scores.tsv")

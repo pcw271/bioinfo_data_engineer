@@ -1,7 +1,8 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl = 2
 
-params.samplesheet = params.samplesheet ?: "samplesheet.csv"
+//params.samplesheet = params.samplesheet ?: "samplesheet.csv"
+params.samplesheet = params.samplesheet ?: "${projectDir}/samplesheet.csv"
 params.outdir      = params.outdir ?: "results"
 
 //

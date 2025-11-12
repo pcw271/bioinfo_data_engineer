@@ -21,6 +21,16 @@ jobs:
           environment-file: environment.yml
           python-version: 3.10
 
+      - name: Debug conda creation
+        run: |
+          echo ">>> Checking conda version"
+          conda --version
+          echo ">>> Listing environment files"
+          ls -lah
+          echo ">>> Showing environment.yml"
+          cat environment.yml
+
+
       - name: Cache Nextflow
         uses: actions/cache@v4
         with:

@@ -97,7 +97,7 @@ process PCA_QC {
 //
 // Workflow entry point
 //
-/*
+
 workflow {
 
     Channel
@@ -118,7 +118,7 @@ workflow {
     PCA_QC(BUILD_MATRICES.out.tpm_matrix)
 
 }
-*/
+
 /*
 workflow clean_only {
     //cleaned_files_ch = Channel
@@ -138,7 +138,7 @@ workflow clean_only {
 }
 
 */
-
+/*
 workflow pca_only {
     /*
      * Load already built TPM matrix
@@ -149,3 +149,5 @@ workflow pca_only {
 
     PCA_QC(tpm_matrix_ch)
 }
+
+*/

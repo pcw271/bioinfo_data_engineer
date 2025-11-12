@@ -7,6 +7,7 @@ dependencies:
   - pandas
   - numpy
   - matplotlib
+  - seaborn
   - scikit-learn
   - scanpy
   - anndata

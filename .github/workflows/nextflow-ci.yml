@@ -49,3 +49,10 @@ jobs:
           path: |
             report.html
             trace.txt
+
+      - name: Debug Conda setup
+        run: |
+          conda info
+          conda list
+          cat environment.yml
+

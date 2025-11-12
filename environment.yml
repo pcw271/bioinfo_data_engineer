@@ -1,13 +1,15 @@
 name: bioinfo_data
 channels:
-  - defaults
   - conda-forge
+  - defaults
 dependencies:
   - python=3.10
   - pandas
-  - requests
+  - numpy
+  - matplotlib
+  - scikit-learn
+  - scanpy
+  - anndata
   - pip
   - pip:
-      - sqlalchemy
-      - pymysql
-
+      - pyarrow
